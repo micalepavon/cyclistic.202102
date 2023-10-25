@@ -1,7 +1,28 @@
-## FIND THE TOP 5 STATIONS MOST VISITED
+-- FIND THE TOP 5 END-STATIONS MOST VISITED IN FEBRUARY 2021
+
 SELECT end_station_name, COUNT(*) AS occurrences
 FROM `case-studies-101.cyclistic.202102`
 WHERE end_station_name IS NOT NULL
 GROUP BY end_station_name
 ORDER BY occurrences DESC
 LIMIT 5
+
+-- FIND THE TOP 5 START-STATIONS MOST VISITED IN FEBRUARY 2021
+
+SELECT start_station_name, COUNT(*) AS occurrences
+FROM `case-studies-101.cyclistic.202102`
+WHERE start_station_name IS NOT NULL
+GROUP BY start_station_name
+ORDER BY occurrences DESC
+LIMIT 5
+
+-- DETERMINE THE USAGE OF ALL 3 OPTIONS BASED ON TYPE OF USER IN FEBRUARY 2021
+
+SELECT 
+  DISTINCT rideable_type, 
+  SUM(IF(member_casual = 'casual', 1, 0)) AS Casual,
+  SUM(IF(member_casual = 'member', 1, 0)) AS Member,
+  COUNT(rideable_type) AS Total
+FROM `case-studies-101.cyclistic.202102`
+WHERE member_casual IS NOT NULL
+GROUP BY rideable_type
