@@ -1,0 +1,7 @@
+## FIND THE TOP 5 STATIONS MOST VISITED
+SELECT end_station_name, COUNT(*) AS occurrences
+FROM `case-studies-101.cyclistic.202102`
+WHERE end_station_name IS NOT NULL
+GROUP BY end_station_name
+ORDER BY occurrences DESC
+LIMIT 5
